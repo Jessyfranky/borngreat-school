@@ -1,0 +1,14 @@
+{
+  "name": "borngreat-school",
+  "version": "1.0.0",
+  "description": "Borngreat School Website & Portal — MERN Stack",
+  "scripts": {
+    "build": "cd client && npm install && npm run build",
+    "start": "cd server && npm install && node server.js",
+    "install-all": "npm install && cd server && npm install && cd ../client && npm install",
+    "dev": "concurrently \"cd server && npm run dev\" \"cd client && npm start\""
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.0"
+  }
+}

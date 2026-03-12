@@ -1,0 +1,148 @@
+/* ── Layout ──────────────────────────────────────────────────────────────── */
+.student-portal { max-width: 1000px; margin: 0 auto; padding: 40px 24px; }
+
+.portal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.portal-header h1 { font-size: 1.8rem; color: var(--green-dark); }
+.portal-header p  { color: var(--gray-600); margin-top: 4px; }
+.header-actions   { display: flex; gap: 10px; }
+
+/* ── Empty state ─────────────────────────────────────────────────────────── */
+.empty-state      { text-align: center; padding: 60px 24px; }
+.empty-icon       { font-size: 3rem; margin-bottom: 16px; }
+.empty-state h3   { color: var(--green-dark); margin-bottom: 8px; }
+.empty-state p    { color: var(--gray-400); }
+
+/* ── Term tabs ───────────────────────────────────────────────────────────── */
+.result-tabs { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+.result-tab {
+  padding: 10px 20px;
+  border-radius: 99px;
+  border: 2px solid var(--gray-200);
+  background: white;
+  font-size: 0.88rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: 'DM Sans', sans-serif;
+  color: var(--gray-600);
+}
+.result-tab:hover  { border-color: var(--green); color: var(--green); }
+.result-tab.active { background: var(--green); border-color: var(--green); color: white; }
+
+/* ── Report card shell ───────────────────────────────────────────────────── */
+.result-card { padding: 0; overflow: hidden; }
+
+/* ── School header ───────────────────────────────────────────────────────── */
+.result-school-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 24px 16px;
+  border-bottom: 2px solid #1a6b3c;
+}
+.result-logo { width: 64px; height: 64px; object-fit: contain; flex-shrink: 0; }
+.result-school-info { flex: 1; text-align: center; }
+.result-school-info h2 { font-size: 1.1rem; font-weight: 800; color: #1a6b3c; margin: 0 0 2px; letter-spacing: 0.02em; }
+.result-school-info p  { font-size: 0.78rem; color: #555; margin: 0 0 8px; }
+.result-type-badge {
+  display: inline-block;
+  border: 1.5px solid #1a6b3c;
+  border-radius: 20px;
+  padding: 3px 18px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #1a6b3c;
+  letter-spacing: 0.05em;
+}
+
+/* ── Meta grid ───────────────────────────────────────────────────────────── */
+.result-meta-grid  { padding: 14px 24px; border-bottom: 1px solid #e5e7eb; }
+.meta-row          { display: flex; gap: 28px; margin-bottom: 6px; flex-wrap: wrap; }
+.meta-field        { display: flex; gap: 6px; align-items: baseline; font-size: 0.85rem; }
+.meta-field span   { color: #6b7280; white-space: nowrap; }
+.meta-field strong { color: #111; }
+.text-green        { color: #166534 !important; }
+.text-red          { color: #dc2626 !important; }
+
+/* ── Cognitive domain ────────────────────────────────────────────────────── */
+.cognitive-section { padding: 0 24px 8px; margin-top: 12px; }
+.domain-title {
+  background: #1a6b3c;
+  color: white;
+  text-align: center;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  padding: 6px;
+}
+
+/* ── Report table ────────────────────────────────────────────────────────── */
+.report-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+.report-table th {
+  background: #f0fdf4;
+  color: #1a6b3c;
+  padding: 7px 10px;
+  border: 1px solid #d1fae5;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.report-table td { padding: 6px 10px; border: 1px solid #e5e7eb; color: #374151; }
+.report-table td.subject-main { font-weight: 600; text-align: right; padding-right: 8px; }
+.report-table td.subject-sub  { color: #6b7280; }
+.report-table tbody tr:nth-child(even) td { background: #fafafa; }
+
+/* ── Total score ─────────────────────────────────────────────────────────── */
+.total-score-row {
+  padding: 8px 24px;
+  font-size: 0.88rem;
+  color: #1a6b3c;
+  font-weight: 600;
+  border-top: 1px solid #e5e7eb;
+}
+
+/* ── Domain tables side by side ──────────────────────────────────────────── */
+.domain-two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; padding: 12px 24px; }
+.domain-table { width: 100%; border-collapse: collapse; font-size: 0.78rem; }
+.domain-table th,
+.domain-table td { border: 1px solid #e5e7eb; padding: 5px 7px; }
+.domain-table th { background: #f0fdf4; color: #1a6b3c; font-weight: 700; text-align: center; }
+.domain-table td.rating-cell { text-align: center; color: #1a6b3c; font-weight: 700; }
+.behaviour-scale { font-size: 0.72rem; color: #6b7280; margin-top: 8px; padding: 6px 8px; background: #f9fafb; border-radius: 4px; line-height: 1.6; }
+
+/* ── Cognitive keys ──────────────────────────────────────────────────────── */
+.cognitive-keys { padding: 8px 24px 12px; font-size: 0.75rem; color: #6b7280; text-align: center; border-top: 1px solid #f3f4f6; }
+
+/* ── Comments ────────────────────────────────────────────────────────────── */
+.report-comments { padding: 12px 24px 20px; border-top: 1.5px solid #e5e7eb; margin-top: 8px; }
+.comment-row { display: flex; gap: 12px; align-items: baseline; margin-bottom: 8px; font-size: 0.85rem; }
+.comment-row span { color: #6b7280; font-weight: 600; white-space: nowrap; min-width: 180px; }
+.comment-row p    { color: #111; border-bottom: 1px solid #e5e7eb; flex: 1; margin: 0; padding-bottom: 2px; }
+
+/* ── Print button ────────────────────────────────────────────────────────── */
+.print-bar { margin-top: 20px; text-align: right; }
+
+/* ── Responsive ──────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .portal-header  { flex-direction: column; }
+  .meta-row       { gap: 14px; }
+  .domain-two-col { grid-template-columns: 1fr; }
+  .comment-row span { min-width: 140px; }
+  .result-card    { margin: 0 -8px; }
+}
+
+/* ── Print ───────────────────────────────────────────────────────────────── */
+@media print {
+  .portal-header, .result-tabs, .print-bar { display: none !important; }
+  .result-card  { box-shadow: none; border: 1px solid #ccc; }
+  .domain-two-col { grid-template-columns: 1fr 1fr !important; }
+}

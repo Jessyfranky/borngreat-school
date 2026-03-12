@@ -1,0 +1,101 @@
+.setup-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 24px;
+    background: linear-gradient(135deg, var(--green-dark), var(--green));
+  }
+  
+  .setup-card {
+    width: 100%;
+    max-width: 480px;
+    padding: 40px;
+  }
+  
+  .setup-header {
+    text-align: center;
+    margin-bottom: 32px;
+  }
+  
+  .setup-logo {
+    width: 72px;
+    height: 72px;
+    object-fit: contain;
+    border-radius: 12px;
+    margin-bottom: 16px;
+  }
+  
+  .setup-header h1 {
+    font-size: 1.7rem;
+    color: var(--green-dark);
+    margin-bottom: 10px;
+  }
+  
+  .setup-header p {
+    color: var(--gray-600);
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+  
+  .form-group label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .form-group label i { color: var(--green); font-size: 0.85rem; }
+  
+  .setup-note {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 0.85rem;
+    color: var(--gray-400);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+  }
+  .setup-note a { color: var(--green); font-weight: 500; }
+  .setup-note i { color: var(--green); }
+  
+  /* Success state */
+  .setup-success { text-align: center; }
+  
+  .success-icon {
+    font-size: 3.5rem;
+    color: var(--green);
+    margin-bottom: 16px;
+  }
+  
+  .setup-success h2 {
+    font-size: 1.5rem;
+    color: var(--green-dark);
+    margin-bottom: 8px;
+  }
+  
+  .setup-success p {
+    color: var(--gray-600);
+    margin-bottom: 24px;
+    font-size: 0.9rem;
+  }
+  
+  .cred-box {
+    background: var(--green-light);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 24px;
+    text-align: left;
+    border: 1px solid rgba(26, 107, 60, 0.15);
+  }
+  
+  .cred-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(26, 107, 60, 0.1);
+    font-size: 0.9rem;
+  }
+  .cred-row:last-child { border-bottom: none; }
+  .cred-row span { color: var(--gray-600); }
+  .cred-row strong { color: var(--green-dark); font-family: monospace; font-size: 1rem; }

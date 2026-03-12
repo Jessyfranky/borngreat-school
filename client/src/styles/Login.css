@@ -1,0 +1,81 @@
+.login-page {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.login-left {
+  background: linear-gradient(160deg, var(--green-dark), var(--green));
+  padding: 60px 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  color: white;
+}
+
+.login-brand { display: flex; align-items: center; gap: 16px; text-decoration: none; }
+.brand-emblem-lg {
+  width: 56px;
+  height: 56px;
+  background: var(--gold);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: white;
+  flex-shrink: 0;
+}
+.login-brand h2 { font-size: 1.3rem; color: white; margin-bottom: 2px; }
+.login-brand p { font-size: 0.8rem; opacity: 0.7; }
+
+.login-info h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem;
+  color: var(--gold);
+  margin-bottom: 24px;
+}
+
+.login-tip {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  margin-bottom: 24px;
+  background: rgba(255,255,255,0.08);
+  padding: 16px;
+  border-radius: 12px;
+}
+
+.tip-icon { font-size: 1.8rem; flex-shrink: 0; }
+.login-tip strong { display: block; color: var(--gold); margin-bottom: 4px; font-size: 0.95rem; }
+.login-tip p { font-size: 0.85rem; opacity: 0.8; line-height: 1.6; }
+.login-tip code { background: rgba(255,255,255,0.15); padding: 2px 8px; border-radius: 4px; font-family: monospace; font-size: 0.85rem; }
+
+.login-right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 48px;
+  background: var(--gray-50);
+}
+
+.login-form-card { width: 100%; max-width: 420px; padding: 40px; }
+
+.login-form-header { margin-bottom: 32px; }
+.login-form-header h1 { font-size: 1.8rem; color: var(--green-dark); margin-bottom: 8px; }
+.login-form-header p { color: var(--gray-400); font-size: 0.9rem; }
+
+.login-help {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 0.82rem;
+  color: var(--gray-400);
+}
+
+@media (max-width: 768px) {
+  .login-page { grid-template-columns: 1fr; }
+  .login-left { padding: 40px 24px; }
+  .login-right { padding: 40px 24px; }
+}

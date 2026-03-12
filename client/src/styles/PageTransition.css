@@ -1,0 +1,211 @@
+/* Base wrapper */
+.page-transition {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: none;
+}
+
+/* Entering state — triggered by JS class add */
+.page-transition.page-enter {
+  animation: pageSlideIn 0.45s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes pageSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Navbar link animation — underline slide */
+.nav-link {
+  position: relative;
+}
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 2px;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: var(--green);
+  border-radius: 2px;
+  transition: width 0.25s ease, left 0.25s ease;
+}
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 60%;
+  left: 20%;
+}
+
+/* Button press effect */
+.btn {
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.2s ease;
+}
+.btn:active:not(:disabled) {
+  transform: scale(0.96) translateY(1px) !important;
+}
+
+/* Card hover lift */
+.card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(0,0,0,0.10);
+}
+
+/* Hero content stagger animation on load */
+.hero-content > * {
+  opacity: 0;
+  animation: heroFadeUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.hero-content > *:nth-child(1) { animation-delay: 0.1s; }
+.hero-content > *:nth-child(2) { animation-delay: 0.22s; }
+.hero-content > *:nth-child(3) { animation-delay: 0.34s; }
+.hero-content > *:nth-child(4) { animation-delay: 0.46s; }
+
+.hero-visual {
+  opacity: 0;
+  animation: heroFadeLeft 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.3s forwards;
+}
+
+@keyframes heroFadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes heroFadeLeft {
+  from { opacity: 0; transform: translateX(24px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* Stats bar count-up feel */
+.stat-item {
+  opacity: 0;
+  animation: statPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+.stat-item:nth-child(1) { animation-delay: 0.5s; }
+.stat-item:nth-child(2) { animation-delay: 0.65s; }
+.stat-item:nth-child(3) { animation-delay: 0.8s; }
+.stat-item:nth-child(4) { animation-delay: 0.95s; }
+
+@keyframes statPop {
+  from { opacity: 0; transform: scale(0.8) translateY(10px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* Value cards stagger */
+.value-card {
+  opacity: 0;
+  animation: cardFadeUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.value-card:nth-child(1) { animation-delay: 0.1s; }
+.value-card:nth-child(2) { animation-delay: 0.2s; }
+.value-card:nth-child(3) { animation-delay: 0.3s; }
+.value-card:nth-child(4) { animation-delay: 0.4s; }
+
+@keyframes cardFadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Timeline items slide in */
+.timeline-item {
+  opacity: 0;
+  animation: timelineIn 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.timeline-item:nth-child(1) { animation-delay: 0.1s; }
+.timeline-item:nth-child(2) { animation-delay: 0.25s; }
+.timeline-item:nth-child(3) { animation-delay: 0.4s; }
+.timeline-item:nth-child(4) { animation-delay: 0.55s; }
+
+@keyframes timelineIn {
+  from { opacity: 0; transform: translateX(-20px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* Vision cards */
+.vision-card {
+  opacity: 0;
+  animation: cardFadeUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.vision-card:nth-child(1) { animation-delay: 0.15s; }
+.vision-card:nth-child(2) { animation-delay: 0.3s; }
+.vision-card:nth-child(3) { animation-delay: 0.45s; }
+
+/* Quick action cards in portal */
+.action-card {
+  opacity: 0;
+  animation: cardFadeUp 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.action-card:nth-child(1) { animation-delay: 0.05s; }
+.action-card:nth-child(2) { animation-delay: 0.12s; }
+.action-card:nth-child(3) { animation-delay: 0.19s; }
+.action-card:nth-child(4) { animation-delay: 0.26s; }
+
+/* Navbar brand slide in on load */
+.navbar-brand {
+  opacity: 0;
+  animation: navBrandIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.05s forwards;
+}
+@keyframes navBrandIn {
+  from { opacity: 0; transform: translateX(-16px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+.navbar-links {
+  opacity: 0;
+  animation: navLinksIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.15s forwards;
+}
+@keyframes navLinksIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.navbar-auth {
+  opacity: 0;
+  animation: navLinksIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.25s forwards;
+}
+
+/* Modal pop in */
+.modal-box {
+  animation: modalPop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+@keyframes modalPop {
+  from { opacity: 0; transform: scale(0.92) translateY(16px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* Table rows fade in */
+tbody tr {
+  opacity: 0;
+  animation: rowFadeIn 0.35s ease forwards;
+}
+tbody tr:nth-child(1)  { animation-delay: 0.05s; }
+tbody tr:nth-child(2)  { animation-delay: 0.10s; }
+tbody tr:nth-child(3)  { animation-delay: 0.15s; }
+tbody tr:nth-child(4)  { animation-delay: 0.20s; }
+tbody tr:nth-child(5)  { animation-delay: 0.25s; }
+tbody tr:nth-child(6)  { animation-delay: 0.30s; }
+tbody tr:nth-child(7)  { animation-delay: 0.35s; }
+tbody tr:nth-child(8)  { animation-delay: 0.40s; }
+tbody tr:nth-child(9)  { animation-delay: 0.45s; }
+tbody tr:nth-child(10) { animation-delay: 0.50s; }
+
+@keyframes rowFadeIn {
+  from { opacity: 0; transform: translateX(-8px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
