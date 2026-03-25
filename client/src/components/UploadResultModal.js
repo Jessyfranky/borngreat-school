@@ -29,16 +29,16 @@ const DEFAULT_PSYCHOMOTOR = [
 ];
 
 const DEFAULT_RECEPTION_SUBJECTS = [
-  { subject: 'Literacy', subSubject: 'Reading',      remark: '' },
-  { subject: 'Literacy', subSubject: 'Sorting',      remark: '' },
-  { subject: 'Literacy', subSubject: 'Recognition',  remark: '' },
-  { subject: 'Literacy', subSubject: 'Writing',      remark: '' },
-  { subject: 'Story',    subSubject: '',              remark: '' },
-  { subject: 'Nursery Science', subSubject: '',       remark: '' },
-  { subject: 'Numeracy', subSubject: 'Counting',     remark: '' },
-  { subject: 'Numeracy', subSubject: 'Sorting',      remark: '' },
-  { subject: 'Numeracy', subSubject: 'Recognition',  remark: '' },
-  { subject: 'Numeracy', subSubject: 'Writing',      remark: '' },
+  { subject: 'Literacy',    subSubject: 'Reading',     remark: '' },
+  { subject: 'Literacy',    subSubject: 'Sorting',     remark: '' },
+  { subject: 'Literacy',    subSubject: 'Recognition', remark: '' },
+  { subject: 'Literacy',    subSubject: 'Writing',     remark: '' },
+  { subject: 'Story',       subSubject: '',            remark: '' },
+  { subject: 'Nursery Science', subSubject: '',        remark: '' },
+  { subject: 'Numeracy',    subSubject: 'Counting',    remark: '' },
+  { subject: 'Numeracy',    subSubject: 'Sorting',     remark: '' },
+  { subject: 'Numeracy',    subSubject: 'Recognition', remark: '' },
+  { subject: 'Numeracy',    subSubject: 'Writing',     remark: '' },
   { subject: 'Oral Expression/Communication', subSubject: '', remark: '' },
   { subject: 'Practical Life',  subSubject: '', remark: '' },
   { subject: 'Nursery Rhymes',  subSubject: '', remark: '' },
@@ -57,15 +57,13 @@ export default function UploadResultModal({ onClose, onUploaded, prefilledStuden
 
   // Standard fields
   const [subjects, setSubjects] = useState(
-    DEFAULT_STANDARD_SUBJECTS.map(s => ({ subject: s, cat: '', exam: '', grade: '', remark: '', subjectPosition: '' }))
+    DEFAULT_STANDARD_SUBJECTS.map(s => ({ subject: s, cat: '', exam: '', grade: '', remark: '' }))
   );
-  const [affective,   setAffective]   = useState(DEFAULT_AFFECTIVE.map(t => ({ trait: t, rating: '' })));
-  const [psychomotor, setPsychomotor] = useState(DEFAULT_PSYCHOMOTOR.map(t => ({ trait: t, rating: '' })));
-  const [numberInClass,  setNumberInClass]  = useState('');
-  const [sex,            setSex]            = useState('');
-  const [classAverage,   setClassAverage]   = useState('');
-  const [studentAverage, setStudentAverage] = useState('');
-  const [overallResult,  setOverallResult]  = useState('PASS');
+  const [affective,     setAffective]     = useState(DEFAULT_AFFECTIVE.map(t => ({ trait: t, rating: '' })));
+  const [psychomotor,   setPsychomotor]   = useState(DEFAULT_PSYCHOMOTOR.map(t => ({ trait: t, rating: '' })));
+  const [numberInClass, setNumberInClass] = useState('');
+  const [sex,           setSex]           = useState('');
+  const [overallResult, setOverallResult] = useState('PASS');
 
   // Reception fields
   const [receptionSubjects, setReceptionSubjects] = useState(DEFAULT_RECEPTION_SUBJECTS);
@@ -91,17 +89,39 @@ export default function UploadResultModal({ onClose, onUploaded, prefilledStuden
     } finally { setSearching(false); }
   };
 
-  // Standard subject helpers
-  const updateSubject = (i, field, val) => {
-    const u = [...subjects]; u[i] = { ...u[i], [field]: val }; setSubjects(u);
+  const getGrade = (total) => {
+    if (total >= 70) return 'A';
+    if (total >= 60) return 'B';
+    if (total >= 50) return 'C';
+    if (total >= 45) return 'D';
+    if (total >= 40) return 'E';
+    return 'F';
   };
-  const addSubject    = () => setSubjects([...subjects, { subject: '', cat: '', exam: '', grade: '', remark: '', subjectPosition: '' }]);
-  const removeSubject = (i) => setSubjects(subjects.filter((_, idx) => idx !== i));
 
-  // Reception subject helpers
-  const updateReception = (i, field, val) => {
-    const u = [...receptionSubjects]; u[i] = { ...u[i], [field]: val }; setReceptionSubjects(u);
+  const getRemarkFromGrade = (grade) => {
+    const map = { A: 'Excellent', B: 'Very Good', C: 'Good', D: 'Fair', E: 'Poor', F: 'Fail' };
+    return map[grade] || '';
   };
+
+  const updateSubject = (i, field, val) => {
+    const u = [...subjects];
+    u[i] = { ...u[i], [field]: val };
+    // Auto-calculate grade and remark when CAT or Exam changes
+    if (field === 'cat' || field === 'exam') {
+      const cat  = field === 'cat'  ? Number(val) || 0 : Number(u[i].cat)  || 0;
+      const exam = field === 'exam' ? Number(val) || 0 : Number(u[i].exam) || 0;
+      if (val !== '') {
+        const total = cat + exam;
+        const grade = getGrade(total);
+        u[i].grade  = grade;
+        u[i].remark = getRemarkFromGrade(grade);
+      }
+    }
+    setSubjects(u);
+  };
+  const addSubject       = () => setSubjects([...subjects, { subject: '', cat: '', exam: '', grade: '', remark: '' }]);
+  const removeSubject    = (i) => setSubjects(subjects.filter((_, idx) => idx !== i));
+  const updateReception  = (i, field, val) => { const u = [...receptionSubjects]; u[i] = { ...u[i], [field]: val }; setReceptionSubjects(u); };
   const addReceptionRow    = () => setReceptionSubjects([...receptionSubjects, { subject: '', subSubject: '', remark: '' }]);
   const removeReceptionRow = (i) => setReceptionSubjects(receptionSubjects.filter((_, idx) => idx !== i));
 
@@ -113,8 +133,7 @@ export default function UploadResultModal({ onClose, onUploaded, prefilledStuden
     try {
       const payload = {
         studentId: studentInfo.studentId,
-        term, session,
-        sex,
+        term, session, sex,
         teacherComment, headComment, nextTermBegins, nextTermFee,
         numberInClass,
       };
@@ -122,12 +141,9 @@ export default function UploadResultModal({ onClose, onUploaded, prefilledStuden
       if (isReception) {
         payload.receptionSubjects = receptionSubjects.filter(s => s.subject.trim());
       } else {
-        const valid = subjects.filter(s => s.subject.trim());
-        payload.subjects          = valid;
+        payload.subjects          = subjects.filter(s => s.subject.trim());
         payload.affectiveDomain   = affective;
         payload.psychomotorDomain = psychomotor;
-        payload.classAverage      = classAverage;
-        payload.studentAverage    = studentAverage;
         payload.overallResult     = overallResult;
       }
 
@@ -208,27 +224,23 @@ export default function UploadResultModal({ onClose, onUploaded, prefilledStuden
                 <input type="number" value={numberInClass} onChange={e => setNumberInClass(e.target.value)} placeholder="e.g. 17" />
               </div>
               {!isReception && (
-                <>
-                  <div className="form-group">
-                    <label>Class Average</label>
-                    <input value={classAverage} onChange={e => setClassAverage(e.target.value)} placeholder="e.g. 88.5" />
-                  </div>
-                  <div className="form-group">
-                    <label>Student Average</label>
-                    <input value={studentAverage} onChange={e => setStudentAverage(e.target.value)} placeholder="e.g. 99.17" />
-                  </div>
-                  <div className="form-group">
-                    <label>Overall Result</label>
-                    <select value={overallResult} onChange={e => setOverallResult(e.target.value)}>
-                      <option>PASS</option>
-                      <option>FAIL</option>
-                      <option>PROMOTED</option>
-                      <option>REPEATED</option>
-                    </select>
-                  </div>
-                </>
+                <div className="form-group">
+                  <label>Overall Result</label>
+                  <select value={overallResult} onChange={e => setOverallResult(e.target.value)}>
+                    <option>PASS</option>
+                    <option>FAIL</option>
+                    <option>PROMOTED</option>
+                    <option>REPEATED</option>
+                  </select>
+                </div>
               )}
             </div>
+            {!isReception && studentInfo && (
+              <div className="auto-calc-note">
+                <i className="fa-solid fa-calculator"></i>
+                Total Score, Student Average, Class Average and Subject Positions are calculated automatically.
+              </div>
+            )}
           </div>
 
           {/* ── RECEPTION SUBJECTS ── */}
@@ -267,7 +279,7 @@ export default function UploadResultModal({ onClose, onUploaded, prefilledStuden
           {!isReception && studentInfo && (
             <div className="upload-section">
               <div className="section-row-header">
-                <h4><i className="fa-solid fa-book"></i> Subject Scores (Cognitive Domain)</h4>
+                <h4><i className="fa-solid fa-book"></i> Subject Scores</h4>
                 <button type="button" className="btn btn-outline btn-sm" onClick={addSubject}>+ Add Subject</button>
               </div>
               <div className="table-wrapper">
@@ -280,14 +292,13 @@ export default function UploadResultModal({ onClose, onUploaded, prefilledStuden
                       <th>Total <span className="th-max">/100</span></th>
                       <th>Grade</th>
                       <th>Remark</th>
-                      <th>Position</th>
                       <th></th>
                     </tr>
                   </thead>
                   <tbody>
                     {subjects.map((s, i) => {
                       const total = (Number(s.cat) || 0) + (Number(s.exam) || 0);
-                      const isBlank = s.cat === '' && s.exam === '' && s.grade === '' && s.remark === '' && s.subjectPosition === '';
+                      const isBlank = s.cat === '' && s.exam === '' && s.grade === '' && s.remark === '';
                       return (
                         <tr key={i} style={{ opacity: isBlank ? 0.45 : 1 }}>
                           <td><input value={s.subject} onChange={e => updateSubject(i, 'subject', e.target.value)} className="score-input subject-input" placeholder="e.g. Mathematics" /></td>
@@ -296,7 +307,6 @@ export default function UploadResultModal({ onClose, onUploaded, prefilledStuden
                           <td><div className={`total-cell ${total >= 45 ? 'pass' : total > 0 ? 'fail' : ''}`}>{total || ''}</div></td>
                           <td><input value={s.grade} onChange={e => updateSubject(i, 'grade', e.target.value)} className="score-input" style={{ width: 60 }} placeholder="A" /></td>
                           <td><input value={s.remark} onChange={e => updateSubject(i, 'remark', e.target.value)} className="score-input remark-input" placeholder="Excellent" /></td>
-                          <td><input value={s.subjectPosition} onChange={e => updateSubject(i, 'subjectPosition', e.target.value)} className="score-input" style={{ width: 70 }} placeholder="1st" /></td>
                           <td>
                             {isBlank && <span style={{ fontSize: '0.7rem', color: '#9ca3af', display: 'block', textAlign: 'center' }}>skip</span>}
                             <button type="button" onClick={() => removeSubject(i)} className="remove-row-btn"><i className="fa-solid fa-xmark"></i></button>
@@ -313,7 +323,7 @@ export default function UploadResultModal({ onClose, onUploaded, prefilledStuden
           {/* ── AFFECTIVE DOMAIN ── */}
           {!isReception && studentInfo && (
             <div className="upload-section">
-              <h4><i className="fa-solid fa-star"></i> Affective Domain <span className="section-hint">(Rate 1–5: 5=Excellent, 4=Very Good, 3=Good, 2=Fair, 1=Poor)</span></h4>
+              <h4><i className="fa-solid fa-star"></i> Affective Domain <span className="section-hint">(5=Excellent, 4=Very Good, 3=Good, 2=Fair, 1=Poor)</span></h4>
               <div className="domain-grid">
                 {affective.map((t, i) => (
                   <div key={i} className="domain-item">
