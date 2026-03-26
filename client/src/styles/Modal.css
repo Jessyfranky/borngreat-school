@@ -1,12 +1,19 @@
 
-/* Auto-calculate note */
+/* ── Auto-calc info bar ──────────────────────────────────────────────────── */
 .auto-calc-note {
-  margin-top: 10px;
-  padding: 8px 12px;
+  margin: 8px 0 12px;
+  padding: 9px 14px;
   background: #f0fdf4;
   border: 1px solid #bbf7d0;
   border-radius: 6px;
   font-size: 0.8rem;
   color: #166534;
+  line-height: 1.7;
 }
 .auto-calc-note i { margin-right: 6px; }
+
+/* Total cell colour states */
+.total-cell        { border-radius: 4px; padding: 3px 6px; font-weight: 700; text-align: center; min-width: 36px; display: inline-block; }
+.total-cell.pass   { background: #dcfce7; color: #166534; }
+.total-cell.avg    { background: #fef9c3; color: #854d0e; }
+.total-cell.fail   { background: #fee2e2; color: #991b1b; }
