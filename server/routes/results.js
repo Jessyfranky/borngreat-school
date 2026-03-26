@@ -1,7 +1,7 @@
 const express = require('express');
 const Result = require('../models/Result');
 const User = require('../models/User');
-const { protect, teacherOnly } = require('../middleware/auth');
+const { protect, teacherOnly } = require('../middleware/authMiddleWare');
 
 const router = express.Router();
 
