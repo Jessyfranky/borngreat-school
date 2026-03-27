@@ -176,7 +176,7 @@ export default function StudentDashboard() {
                   <div className="result-school-header">
                     <img src="/logo.jpeg" alt="Logo" className="result-logo" />
                     <div className="result-school-info">
-                      <h2>BORNGREAT SCHOOLS</h2>
+                      <h2>BORNGREAT SCHOOL</h2>
                       <p>19 CALABAR STREET, UYO AKWA IBOM STATE, AKWAIBOM, NIGERIA</p>
                       <div className="result-type-badge">
                         {(() => {
