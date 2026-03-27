@@ -176,7 +176,7 @@ export default function StudentDashboard() {
                   <div className="result-school-header">
                     <img src="/logo.jpeg" alt="Logo" className="result-logo" />
                     <div className="result-school-info">
-                      <h2>BORNGREAT INTERNATIONAL SCHOOLS</h2>
+                      <h2>BORNGREAT SCHOOLS</h2>
                       <p>19 CALABAR STREET, UYO AKWA IBOM STATE, AKWAIBOM, NIGERIA</p>
                       <div className="result-type-badge">
                         {(() => {
@@ -282,7 +282,7 @@ export default function StudentDashboard() {
                           &nbsp;&nbsp;|&nbsp;&nbsp;
                           Student Average: <strong>{selectedResult.studentAverage}</strong>
                           &nbsp;&nbsp;|&nbsp;&nbsp;
-                          Position: <strong>{selectedResult.position ? `${selectedResult.position}${ordinalSuffix(selectedResult.position)} of ${selectedResult.classSize}` : '—'}</strong>
+                          
                         </div>
                       )}
 
