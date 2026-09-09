@@ -19,7 +19,7 @@ export default function StudentDashboard() {
   const [selectedResult, setSelectedResult] = useState(null);
   const [assignments,    setAssignments]    = useState([]);
   const [term,           setTerm]           = useState('');
-  const [session,        setSession]        = useState(currentSession());
+  const [session,        setSession]        = useState('');
   const [loading,        setLoading]        = useState(false);
   const [showPinModal,   setShowPinModal]   = useState(user?.mustChangePin);
   const printRef = useRef();
