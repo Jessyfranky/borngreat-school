@@ -128,12 +128,15 @@ export default function StudentDashboard() {
           <div className="filters card">
             <div className="form-group" style={{ marginBottom: 0 }}>
               <label>Academic Session</label>
-              <select value={session} onChange={e => setSession(e.target.value)}>
-                <option value="2025/2026">2025/2026</option>
-                <option value="2024/2025">2024/2025</option>
-                <option value="2023/2024">2023/2024</option>
-                <option value="2022/2023">2022/2023</option>
-              </select>
+            <select value={session} onChange={e => setSession(e.target.value)}>
+  <option value="">All Sessions</option>
+  {Array.from({ length: 7 }, (_, i) => {
+    const y = new Date().getFullYear() - 3 + i;
+    return `${y}/${y + 1}`;
+  }).map(s => (
+    <option key={s} value={s}>{s}</option>
+  ))}
+</select>
             </div>
             <div className="form-group" style={{ marginBottom: 0 }}>
               <label>Term</label>
